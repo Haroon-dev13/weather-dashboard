@@ -33,10 +33,15 @@ function displayHistory() {
     console.log("H: "+history);
     $('#history').empty();        
     if(history){
+        var ulEl = $('<ul>').addClass('list-group');
         for (let i = 0; i < history.length; i++) {
-            var hP = $('<a>').addClass('city').attr('href','#').text(history[i]);
-            $('#history').append(hP);        
+            var liEl = $('<li>').addClass('list-group-item');
+            var aTag = $('<a>').attr('href','#').text(history[i]);
+            liEl.append(aTag);
+            ulEl.append(liEl);
         }
+        $('#history').append(ulEl);        
+
     }
 }
 
