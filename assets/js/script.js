@@ -3,7 +3,9 @@ $( document ).ready(function() {
     var lat = "";
     var lon = "";
     var city = "london";
+    var historyNames = [];
     displayWeather(city);
+    displayHistory();
 
 
 $("#search-button").on("click", function(event) {
@@ -13,6 +15,30 @@ $("#search-button").on("click", function(event) {
         displayWeather(city);
     
 })
+
+
+$(".list-group").on("click", function(event) {
+    event.preventDefault();
+    city='';
+    city = $(event.target).text();
+    // console.log($(event.target).text());
+    displayWeather(city);
+
+})
+
+// display stored city names
+
+function displayHistory() {
+    var history = JSON.parse(localStorage.getItem("history"));
+    console.log("H: "+history);
+    $('#history').empty();        
+    if(history){
+        for (let i = 0; i < history.length; i++) {
+            var hP = $('<a>').addClass('city').attr('href','#').text(history[i]);
+            $('#history').append(hP);        
+        }
+    }
+}
 
 
 
@@ -27,7 +53,7 @@ function displayWeather(city) {
         lat= response[0].lat;
         lon= response[0].lon;
         apiURL="";
-        var apiURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&cnt=24&appid="+apiKey+"&units=metric";
+        var apiURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&cnt=7&appid="+apiKey+"&units=metric";
     
         $.ajax({
           url: apiURL,
@@ -39,6 +65,8 @@ function displayWeather(city) {
         console.log(res);
         $('#today').empty();
         $('#forecast').empty();
+        historyNames.push(response.city.name);
+        localStorage.setItem("history", JSON.stringify(historyNames));
         var formatedDate = moment(res[0].dt_txt).format('DD-MM-YYYY');
         var cityName = $('<h3>').text(response.city.name+" ("+formatedDate+") ");
         var icon = $('<img>').attr('src','http://openweathermap.org/img/w/'+res[0].weather[0].icon+'.png');
@@ -63,6 +91,7 @@ function displayWeather(city) {
             $('#forecast').append(colDiv);
 
         } 
+        displayHistory();
         });
 
       });
