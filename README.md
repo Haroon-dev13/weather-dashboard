@@ -13,7 +13,7 @@ This is a Weather Dashboard.When a user searches for a city this will present cu
 Given below is the screen short of example output.
 
 * ### Weather Dashboard:
-![Weather Dashboard](assets/images/)
+![Weather Dashboard](assets/images/weather-dashboard.png)
 
 ## Credits
 N/A

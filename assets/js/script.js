@@ -86,7 +86,7 @@ function displayWeather(city) {
         for (let i = 1; i < 6; i++) {
             formatedDate = '';
             formatedDate = moment(res[i].dt_txt).format('DD-MM-YYYY');
-            var colDiv = $('<div>').attr("class","col-md-2");
+            var colDiv = $('<div>').attr("class","col-md-2 bg m-2");
             var h4Date = $('<h4>').text(formatedDate);
             var imgIcon = $('<img>').attr('src','http://openweathermap.org/img/w/'+res[i].weather[0].icon+'.png');
             var pTemp = $('<p>').text("Temp: "+res[i].main.temp+" C");
