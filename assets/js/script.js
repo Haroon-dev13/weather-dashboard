@@ -58,7 +58,7 @@ function displayWeather(city) {
         lat= response[0].lat;
         lon= response[0].lon;
         apiURL="";
-        var apiURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&cnt=7&appid="+apiKey+"&units=metric";
+        var apiURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apiKey+"&units=metric";
     
         $.ajax({
           url: apiURL,
@@ -83,7 +83,9 @@ function displayWeather(city) {
         var h3heading = $('<h3>').attr("class","col-12").text("5-Day Forecast:");
         $('#forecast').append(h3heading);
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 40; i++) {
+            // goto next day
+            i=i+6;
             formatedDate = '';
             formatedDate = moment(res[i].dt_txt).format('DD-MM-YYYY');
             var colDiv = $('<div>').attr("class","col-md-2 bg m-2");
